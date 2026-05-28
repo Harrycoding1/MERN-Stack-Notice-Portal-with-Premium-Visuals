@@ -23,15 +23,15 @@ The application operates as a decoupled client-server structure:
 
 ```mermaid
 graph TD
-    Client[React SPA client:5173] -->|API Requests / Proxy| Express[Express server:5000]
-    Express -->|Verify JWT| Auth[JWT Middleware]
-    Express -->|Query/Mutate| Mongoose[Mongoose ODM]
-    Mongoose -->|Fallback: In-Memory DB| Mongo[MongoDB / Memory Server]
+    Client["React SPA client (Port 5173)"] -->|API Requests| Express["Express server (Port 5000)"]
+    Express -->|Verify JWT| Auth["JWT Middleware"]
+    Express -->|Query / Mutate| Mongoose["Mongoose ODM"]
+    Mongoose -->|In-Memory DB| Mongo["MongoDB Server"]
     
-    subgraph Frontend Pages
-        Client --> Notices[Notice Portal homepage]
-        Client --> Login[Login Portal]
-        Client --> Dashboard[Admin Dashboard]
+    subgraph "Frontend Pages"
+        Client --> Notices["Notice Portal homepage"]
+        Client --> Login["Login Portal"]
+        Client --> Dashboard["Admin Dashboard"]
     end
 ```
 

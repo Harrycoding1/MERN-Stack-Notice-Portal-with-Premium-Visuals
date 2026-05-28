@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniStream | Notice Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <nav aria-label="Main Navigation">
+            <div class="logo">
+                <strong>UniStream</strong>
+            </div>
+            <ul>
+                <li><a href="#notices">Notices</a></li>
+                <li><a href="login.html">Portal Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="alert-ribbon">
+        URGENT: Mid-Term Examination Scheduling Changes Issued Safely Online[cite: 89, 121].
+    </div>
+
+    <main>
+        <section id="notices">
+            <h2>Latest Notices</h2>
+            
+            <article class="notice-card urgent">
+                <span class="badge urgent">URGENT</span>
+                <h3>Mid-Term Exam Schedule - BBA 4th Semester [cite: 121, 123]</h3>
+                <p>Mid-term exams will commence from April 28, 2026[cite: 128]. Download files from the vault[cite: 129].</p>
+            </article>
+
+            <article class="notice-card">
+                <span class="badge">GENERAL</span>
+                <h3>Guest Lecture: Web Technologies & Industry Trends [cite: 137]</h3>
+                <p>The IT Department invites all students to attend structural workshops this Thursday[cite: 141].</p>
+            </article>
+        </section>
+
+        <aside class="notice-card">
+            <h3>Quick Filter</h3>
+            <p>Select your department tag to prioritize content filtering mechanisms[cite: 18].</p>
+        </aside>
+    </main>
+
+    <button class="theme-toggle-btn" id="themeBtn">Toggle Dark Mode</button>
+
+    <script>
+        // Basic DOM Interaction [cite: 213]
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            if(document.body.classList.contains('dark-theme')) {
+                themeBtn.textContent = "Toggle Light Mode";
+            } else {
+                themeBtn.textContent = "Toggle Dark Mode";
+            }
+        });
+    </script>
+</body>
+</html>

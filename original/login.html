@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniStream | Secure Portal Forms</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Portal Authentication</h2>
+        <form id="authForm" novalidate>
+            <div class="form-group">
+                <label for="email">Campus Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="username@unistream.edu">
+                <div class="error-msg" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••">
+                <div class="error-msg" id="passwordError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Login to Dashboard</button>
+        </form>
+    </div>
+
+    <div class="form-container" style="margin-top: 0;">
+        <h2>Create Campus Notice</h2>
+        <form id="noticeForm" novalidate>
+            <div class="form-group">
+                <label for="title">Notice Title</label>
+                <input type="text" id="title" class="form-control" placeholder="e.g., Midterm Announcement">
+                <div class="error-msg" id="titleError"></div>
+            </div>
+            <div class="form-group">
+                <label for="expiry">Display Duration (Days)</label>
+                <input type="text" id="expiry" class="form-control" placeholder="e.g., 7">
+                <div class="error-msg" id="expiryError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Publish Notice</button>
+        </form>
+    </div>
+
+    <script>
+        // ==========================================
+        // FORM 1: AUTHENTICATION VALIDATION [cite: 22, 214]
+        // ==========================================
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.bind;
+            let isValid = true;
+            
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            
+            // Required & Email regex match [cite: 216, 217]
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim()) {
+                emailError.textContent = "Email address cannot be left empty."; [cite: 221]
+                emailError.style.display = "block";
+                isValid = false;
+            } else if (!emailRegex.test(email.value)) {
+                emailError.textContent = "Please provide a valid formatting style (e.g., user@domain.com)."; [cite: 221]
+                emailError.style.display = "block";
+                isValid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+            
+            // Password Validation Architecture [cite: 219]
+            if (!password.value) {
+                passwordError.textContent = "Security authentication token field is required."; [cite: 221]
+                passwordError.style.display = "block";
+                isValid = false;
+            } else if (password.value.length < 8) {
+                passwordError.textContent = "Password must maintain a baseline length of at least 8 characters."; [cite: 221]
+                passwordError.style.display = "block";
+                isValid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+            
+            if (!isValid) e.preventDefault(); // Halt transmission if rules fail
+        });
+
+        // ==========================================
+        // FORM 2: NOTICE INPUT VALIDATION [cite: 214]
+        // ==========================================
+        document.getElementById('noticeForm').addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            const title = document.getElementById('title');
+            const expiry = document.getElementById('expiry');
+            
+            const titleError = document.getElementById('titleError');
+            const expiryError = document.getElementById('expiryError');
+            
+            // Title Verification [cite: 216]
+            if (!title.value.trim()) {
+                titleError.textContent = "Notice publishing requires a valid structured title head."; [cite: 221]
+                titleError.style.display = "block";
+                isValid = false;
+            } else {
+                titleError.style.display = "none";
+            }
+            
+            // Numeric Field Validation [cite: 220]
+            const numericRegex = /^[0-9]+$/;
+            if (!expiry.value.trim()) {
+                expiryError.textContent = "Please define operational visibility lifetimes."; [cite: 221]
+                expiryError.style.display = "block";
+                isValid = false;
+            } else if (!numericRegex.test(expiry.value) || parseInt(expiry.value) <= 0) {
+                expiryError.textContent = "Lifespan values must represent a standalone valid numerical digit (> 0)."; [cite: 221]
+                expiryError.style.display = "block";
+                isValid = false;
+            } else {
+                expiryError.style.display = "none";
+            }
+            
+            if (!isValid) e.preventDefault();
+        });
+    </script>
+</body>
+</html>
